@@ -17,8 +17,16 @@ function addProject(proj) {
         .into("project")
 }
 
+function getTasksByProjectId(id) {
+    return db("project")
+        .leftJoin("task", "project_id", "project.id")
+        .where("project_id", id)
+    .select("project.id", "project.name as Project_name", "task.name as Task_name")
+}
+
 module.exports = {
     findProject,
     findProjectById,
     addProject,
+    getTasksByProjectId
 }

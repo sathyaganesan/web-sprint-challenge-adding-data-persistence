@@ -27,6 +27,16 @@ router.get("/:id", async (req, res, next) => {
     }
 })
 
+
+router.get("/:id/task", async (req, res, next) => {
+    try {
+        const getTask = await Project.getTasksByProjectId(req.params.id)
+        res.json(getTask);
+    } catch (err) {
+        next(err);
+    }
+})
+
 router.post("/", async (req, res, next) => {
     try {
         const [project] = await Project.addProject(req.body)
